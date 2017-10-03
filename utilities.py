@@ -108,5 +108,22 @@ def gnfsFactors(num, primalityTest=False):
 def isPalindrome(var):
     return str(var) == str(var)[::-1]
 
-def reduceFraction(num, den):
-    pass
+def factorsPower(num):
+    numFactors = factors(num)
+    return sorted([(f, numFactors.count(f)) for f in set(numFactors)])
+
+def commonPrimeFactors(num1, num2):
+    commonFactors = []
+    factors1 = factorsPower(num1)
+    factors2 = factorsPower(num2)
+    while len(factors1) > 0 and len(factors2) > 0:
+        if factors1[0][0] == factors2[0][0]:
+            commonFactors.append((factors1[0][0], min(factors1[0][1], factors2[0][1])))
+            del factors1[0]
+            del factors2[0]
+        else:
+            if factors1[0][0] < factors2[0][0]:
+                del factors1[0]
+            else:
+                del factors2[0]
+    return commonFactors
