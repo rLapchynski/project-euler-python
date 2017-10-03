@@ -107,3 +107,6 @@ def gnfsFactors(num, primalityTest=False):
 
 def isPalindrome(var):
     return str(var) == str(var)[::-1]
+
+def reduceFraction(num, den):
+    pass
