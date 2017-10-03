@@ -104,3 +104,6 @@ def qsFactors(num, primalityTest=False):
 def gnfsFactors(num, primalityTest=False):
     #TODO
     pass
+
+def isPalindrome(var):
+    return str(var) == str(var)[::-1]
