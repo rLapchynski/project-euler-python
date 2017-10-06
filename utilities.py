@@ -127,3 +127,6 @@ def commonPrimeFactors(num1, num2):
             else:
                 del factors2[0]
     return commonFactors
+
+def serialNCube(layer, dim):
+    pass
