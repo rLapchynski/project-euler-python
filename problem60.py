@@ -2,29 +2,34 @@
 
 from math import *
 
-digit = lambda num,n: (num//10**n)%10
 
-def pointsOnLayer(layer, subLayer, dim):
-    points = []
+def points_on_layer(layer, dim):
+
+    if dim == 1:
+        return [[layer]]
+    else:
+        points = []
+        for z in range(0, layer+1):
+            for point in points_on_layer(layer-z, dim-1):
+                points.append([z] + point)
+        return points
+
+        # return [(([z]+point) for point in points_on_layer(layer-z, dim-1)) for z in range(0, layer+1)]
 
 
-def spread(num, dim):
-    if (num, dim) == (3, 2):
-        return [(1,2),(2,1)]
-
-    assert num >= dim
 
 
-def all3dig():
-    return [ tuple([digit(i,n) for n in range(0,3)]) for i in range(0, 999)]
 
-#pointsOnLayer(4,0,4)
 
-points = all3dig()
-points = [a for a in points if sum(a)==5]
 
-for i in points:
-    print(i)
 
-#for j in range(0,dim):
-#    points.append( tuple([point[(j+k)%dim] for k in range(0, dim)]) )
+
+
+
+
+
+
+
+
+
+
