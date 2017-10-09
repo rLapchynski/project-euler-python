@@ -4,6 +4,7 @@
 
 from math import *
 
+
 def isPrime(num, negativePrime=True):
     """Determines is a number is prime
 
@@ -15,6 +16,7 @@ def isPrime(num, negativePrime=True):
     a = factors(num, True)
     return a != [] and a[0] == num
 
+
 def factors(num, primalityTest=False):
     """Determines the prime factors of a number
 
@@ -24,14 +26,15 @@ def factors(num, primalityTest=False):
     if num <= 10e4:
         return trialFactors(num, primalityTest)
     elif num <= 10e10:
-        #TODO Change to rhoFactors
+        # TODO Change to rhoFactors
         return trialFactors(num, primalityTest)
     elif num <= 10e100:
-        #TODO Change to qsFactors
+        # TODO Change to qsFactors
         return trialFactors(num, primalityTest)
     else:
-        #TODO Change to gnfsFactors
+        # TODO Change to gnfsFactors
         return trialFactors(num, primalityTest)
+
 
 def trialFactors(num, primalityTest=False, includeNeg=True):
     """Determines the prime factors of a number by trial division.
@@ -59,32 +62,32 @@ def trialFactors(num, primalityTest=False, includeNeg=True):
         return []
 
     # Remove all factors that are 2 because 2 is not 6n+/-1
-    while num%2==0:
+    while num % 2 == 0:
         factors.append(2)
         num /= 2
         if primalityTest:
             return factors
 
     # Remove all factors that are 3 because 3 is not 6n+/-1
-    while num%3==0:
+    while num % 3 == 0:
         factors.append(3)
         num /= 3
         if primalityTest:
             return factors
 
     while num != 1:
-        for i in range(6, int(ceil(sqrt(num)))+6, 6):
-            if num % (i-1) == 0:
-                factors.append(i-1)
+        for i in range(6, int(ceil(sqrt(num))) + 6, 6):
+            if num % (i - 1) == 0:
+                factors.append(i - 1)
                 if primalityTest:
                     return factors
-                num /= i-1
+                num /= i - 1
                 break
-            if num % (i+1) == 0:
-                factors.append(i+1)
+            if num % (i + 1) == 0:
+                factors.append(i + 1)
                 if primalityTest:
                     return factors
-                num /= i+1
+                num /= i + 1
                 break
         else:
             # neither of the above breaks executed for any prime i+/-1<sqrt(num) so num is prime
@@ -93,24 +96,30 @@ def trialFactors(num, primalityTest=False, includeNeg=True):
 
     return factors
 
+
 def rhoFactors(num, primalityTest=False):
-    #TODO
+    # TODO
     pass
+
 
 def qsFactors(num, primalityTest=False):
-    #TODO
+    # TODO
     pass
 
+
 def gnfsFactors(num, primalityTest=False):
-    #TODO
+    # TODO
     pass
+
 
 def isPalindrome(var):
     return str(var) == str(var)[::-1]
 
+
 def factorsPower(num):
     numFactors = factors(num)
     return sorted([(f, numFactors.count(f)) for f in set(numFactors)])
+
 
 def commonPrimeFactors(num1, num2):
     commonFactors = []
@@ -128,5 +137,22 @@ def commonPrimeFactors(num1, num2):
                 del factors2[0]
     return commonFactors
 
-def serialNCube(layer, dim):
-    pass
+
+def pointsOnLayer(layer, dim):
+    if dim == 1:
+        yield [layer]
+    else:
+        # points = []
+        for z in range(0, layer + 1):
+            for point in pointsOnLayer(layer - z, dim - 1):
+                yield ([z] + point)  # points.append([z] + point)
+                # return points
+
+
+def serialCube(dim):
+    i = 0
+    while True:
+        layer = pointsOnLayer(i, dim)
+        for point in layer:
+            yield point
+        i += 1
