@@ -6,7 +6,7 @@ numLychrel = 0;
 for i in range(0, 10000):
 
     n = 0
-    while not isPalindrome(i + int(str(i)[::-1]) ) and n<50:
+    while not is_palindrome(i + int(str(i)[::-1])) and n<50:
         i = i + int(str(i)[::-1])
         n += 1
     # Didn't find a palindrome before n=50

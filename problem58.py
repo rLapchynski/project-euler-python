@@ -1,6 +1,6 @@
 # https://projecteuler.net/problem=58
 
-from utilities import isPrime
+from utilities import is_prime
 
 # Return the corners of layer n, indexed from 1 is the central 1
 def corners(num):
@@ -10,6 +10,6 @@ def corners(num):
 numPrime, layer = 3, 2
 while float(numPrime)/float(4*layer-3) > 0.1:
     layer += 1
-    numPrime += sum([isPrime(i) for i in corners(layer)])
+    numPrime += sum([is_prime(i) for i in corners(layer)])
 
 print((layer-1)*2+1)
