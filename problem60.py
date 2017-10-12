@@ -44,7 +44,7 @@ for i in sorted_unique_points(5):
     #     break
     b += 1
 
-#print(is_prime(25241))
+# print(is_prime(25241))
 # baseList = [3, 7, 109, 673, 0]
 # i = 0
 # while not concat_primes(baseList):

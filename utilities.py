@@ -119,6 +119,25 @@ def common_prime_factors(num1, num2):
     return common_factors
 
 
+def polygonal_num(poly, n):
+    # My attempt at a switch
+    return int([-1, -1, -1,                 # 0, 1, and 2 have no polygonal numbers
+                lambda a: a*(a+1)/2,        # Triangular numbers
+                lambda a: a*a,              # Square Numbers
+                lambda a: a*(3*a-1)/2,      # Pentagonal
+                lambda a: a*(2*a-1),        # Hexagonal
+                lambda a: a*(5*a-3)/2,      # Heptagonal
+                lambda a: a*(3*a-2)         # Octagonal
+                ][poly](n+1))
+
+
+def serial_polygonal(poly):
+    i=0
+    while True:
+        yield polygonal_num(poly, i)
+        i += 1
+
+
 def points_on_layer(layer, dim):
     # points on a given layer of a dim-dimensional cube. sum(point_coordinates)==layer for every point on layer
     if dim == 1:
