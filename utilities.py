@@ -214,21 +214,30 @@ def serial_primes():
         i += 6
 
 
-class PrimeList:
-    # Creates a list of primes, generating them as they're being accessed.
+class PrimeList(list):
+    """
+        Generates sequential primes, storing them in a list.
+        It is most efficient to access in sequential order; \
+        if a requested index is larger than the current list, all primes up to that index are generated.
+
+    """
     def __init__(self):
         self.currList = []
         self.primeGen = serial_primes()
-
-    def __iter__(self):
-        return self
 
     def __next__(self):
         self.currList.append(next(self.primeGen))
         return self.currList[-1]
 
     def __getitem__(self, key):
-        # if the list hasn't been generated up to key, generate the next prime and try again (recursively)
+        """
+        Gets the key'th prime number, either from the list of primes already generated,
+        or if key is the length of the list or larger, generates the next prime with next(self)
+        and calls itself recursively until the list is key long.
+
+        :param key: The index of the prime to return
+        :return: The key'th prime number
+        """
         if key >= len(self.currList):
             next(self)
             return self[key]
